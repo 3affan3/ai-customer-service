@@ -2,8 +2,6 @@ import transformers
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 import os
-import math
-import zerorpc
 
 
 def save():
@@ -39,5 +37,3 @@ def getResponse(m):
     if(p == 98957):
         p = getPipeline()
     return evaluate(p, m)
-
-print(getResponse("HEYYY"))
