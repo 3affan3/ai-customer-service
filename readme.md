@@ -10,3 +10,8 @@
 - Custom LLM Model for Text Generation: NeoGPT by EleutherAI using 1.3 Billion Parameters
 - Vite React js version 18.3.1 
 - Tailwind CSS version 3.4.9
+
+## Contributers:
+- Katifa Memon
+- Haseeba Yasin
+- Affan Nazir
