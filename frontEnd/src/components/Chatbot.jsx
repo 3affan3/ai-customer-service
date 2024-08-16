@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect, useRef } from "react";
+import axios from 'axios';
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([
@@ -16,17 +17,24 @@ const Chatbot = () => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputValue.trim() !== "") {
       setMessages([...messages, { text: inputValue, fromBot: false }]);
-      setInputValue("");
       // Here you can add more logic for bot responses or API calls.
-      setTimeout(() => {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { text: "This is a bot response.", fromBot: true },
-        ]);
-      }, 1000);
+      
+      const t = inputValue.replace(/ /g, "~");
+      setInputValue("");
+      response = await axios.get(`http://127.0.0.1:33/?message=${t}`)
+            .then(response => {
+                setMessages(prevMessages => [
+                    ...prevMessages,
+                    { text: response.data, fromBot: true }
+                ]);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+      
     }
   };
 
