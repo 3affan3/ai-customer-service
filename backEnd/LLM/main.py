@@ -8,7 +8,7 @@ def save():
     os.makedirs("./model", exist_ok=True)
     if(len(os.listdir("./model")) == 0):
         print("Message: Downloading Model")
-        model_name = "EleutherAI/gpt-neo-1.3B" #ID of Model
+        model_name = "EleutherAI/gpt-neo-125M" #ID of Model
         tokenizer = AutoTokenizer.from_pretrained(model_name) #Automatically load the correct tokenizer for that model
         model = AutoModelForCausalLM.from_pretrained(model_name) #Automatically download the correct model from the name
         
