@@ -9,7 +9,7 @@ def save():
     if(len(os.listdir("./model")) == 0):
         print("Message: Downloading Model")
         model_name = "EleutherAI/gpt-neo-125M" #ID of Model
-        tokenizer = AutoTokenizer.from_pretrained(model_name) #Automatically load the correct tokenizer for that model
+        tokenizer = AutoTokenizer.from_pretrained(model_name, clean_up_tokenization_spaces=True) #Automatically load the correct tokenizer for that model
         model = AutoModelForCausalLM.from_pretrained(model_name) #Automatically download the correct model from the name
         
         model.save_pretrained('./model')
@@ -19,7 +19,7 @@ def save():
 
 
 def getPipeline():
-    tokenizer = AutoTokenizer.from_pretrained('./model')
+    tokenizer = AutoTokenizer.from_pretrained('./model', clean_up_tokenization_spaces=True)
     model = AutoModelForCausalLM.from_pretrained('./model')
     pipeline = transformers.pipeline("text-generation", model=model, tokenizer=tokenizer, device=0 if torch.cuda.is_available() else -1) #create the pipeline (a HuggingFace wrapper to the already present TF/PyTorch LLM)
     return pipeline
